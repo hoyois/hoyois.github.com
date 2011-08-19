@@ -4,19 +4,20 @@
 
 body {
 	margin: 0 20px;
+	padding-top: 20px;
 }
 
 header {
 	position: relative;
 }
 
-#top {
-	margin: 0 0 20px 0;
-	padding: 20px 0 0 0;
-}
-
 nav {
 	margin: 1em 0;
+}
+
+.offscreen { /* w3c.org uses this! */
+	position: absolute;
+	left: -1000em;
 }
 
 .toplink {
@@ -57,11 +58,6 @@ p.note::before {
 	font-weight: bold;
 }
 
-p.tip::before {
-	content: "Tip. ";
-	font-weight: bold;
-}
-
 figure {
 	display: block;
 	margin: 1em 0;
@@ -78,11 +74,11 @@ dfn {
 
 pre {
 	color: black;
-	background-color: lightgray;
+	background-color: #EEE;
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	padding: 1em;
-	width: intrinsic;
+	border-radius: 5px;
 }
 
 dt {
@@ -102,11 +98,7 @@ dd {
 	content: counter(list) ". ";
 }
 
-p.question {
-	font-weight: bold;
-}
-
-p.question::before {
+h4.question::before {
 	content: "Q. ";
 }
 
@@ -128,10 +120,6 @@ th, td {
 	text-align: left;
 	vertical-align: top;
 	padding: .8ex 1.6ex;
-}
-
-.icon_link {
-	text-decoration: none;
 }
 
 footer {

@@ -20,6 +20,11 @@ nav {
 	left: -1000em;
 }
 
+.warning {
+	font-weight: bold;
+	font-style: italic;
+}
+
 .toplink {
 	position: absolute;
 	right: 0;

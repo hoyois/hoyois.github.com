@@ -1,4 +1,4 @@
-(* Show/Hide Invisible Files 2011-08-21 *)
+(* Show/Hide Invisible Files 2012-07-28 *)
 
 on run
 	tell application "Finder"
@@ -7,15 +7,20 @@ on run
 	
 	-- Toggle AppleShowAllFiles
 	(* Note: it's very important that the dialogs below be NOT displayed by the Finder. Putting the Finder in the background makes it write its window state to the plist. *)
-	if (do shell script "/usr/bin/defaults read com.apple.Finder AppleShowAllFiles") = "1" then
-		set d to display dialog "To hide invisible files, the Finder must be relauched." with icon alias ":System:Library:CoreServices:Finder.app:Contents:Resources:Finder.icns" with title "Hide Invisible Files" buttons {"Cancel", "Relauch Finder"} default button "Relauch Finder"
+	try
+		set status to do shell script "/usr/bin/defaults read com.apple.Finder AppleShowAllFiles"
+	on error
+		set status to "0"
+	end try
+	if status = "1" then
+		set d to display dialog "To hide all invisible files, the Finder must be relauched." with icon alias ":System:Library:CoreServices:Finder.app:Contents:Resources:Finder.icns" with title "Hide Invisible Files" buttons {"Cancel", "Relauch Finder"} default button "Relauch Finder"
 		if button returned of d = "Relauch Finder" then
 			do shell script "/usr/bin/defaults write com.apple.Finder AppleShowAllFiles 0"
 		else
 			return 0
 		end if
 	else
-		set d to display dialog "To show all files, the Finder must be relauched." with icon alias ":System:Library:CoreServices:Finder.app:Contents:Resources:Finder.icns" with title "Show All Files" buttons {"Cancel", "Relauch Finder"} default button "Relauch Finder"
+		set d to display dialog "To show all invisible files, the Finder must be relauched." with icon alias ":System:Library:CoreServices:Finder.app:Contents:Resources:Finder.icns" with title "Show All Files" buttons {"Cancel", "Relauch Finder"} default button "Relauch Finder"
 		if button returned of d = "Relauch Finder" then
 			do shell script "/usr/bin/defaults write com.apple.Finder AppleShowAllFiles 1"
 		else
